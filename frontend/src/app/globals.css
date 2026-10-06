@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber-bg: #0A0E1A;
+  --cyber-bg2: #111827;
+  --cyber-bg3: #1F2937;
+  --cyber-terminal: #0D1117;
+  --cyber-green: #00FF88;
+  --cyber-cyan: #00D4FF;
+  --cyber-gold: #FFD700;
+  --cyber-red: #EF4444;
+  --cyber-success: #10B981;
+  --cyber-border: #374151;
+  --cyber-muted: #9CA3AF;
+  --cyber-text: #E5E7EB;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  background-color: var(--cyber-bg);
+  color: var(--cyber-text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* ── Scrollbar custom ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--cyber-bg2); }
+::-webkit-scrollbar-thumb { background: var(--cyber-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyber-muted); }
+
+/* ── Terminal ────────────────────────────────────────────────────────────── */
+.terminal-font { font-family: 'Courier New', Courier, monospace; }
+.terminal-cursor::after {
+  content: '█';
+  color: var(--cyber-green);
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Cyber glow effects ──────────────────────────────────────────────────── */
+.glow-green { text-shadow: 0 0 10px var(--cyber-green); }
+.glow-cyan  { text-shadow: 0 0 10px var(--cyber-cyan); }
+.border-glow-green { box-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+.border-glow-cyan  { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+
+/* ── Utility classes ─────────────────────────────────────────────────────── */
+.cyber-card {
+  @apply bg-cyber-bg2 border border-cyber-border rounded-lg p-4;
+}
+
+.cyber-input {
+  @apply w-full bg-cyber-bg3 border border-cyber-border text-cyber-text
+         rounded-lg px-4 py-2.5 focus:outline-none focus:border-cyber-green
+         focus:ring-1 focus:ring-cyber-green placeholder-cyber-muted
+         transition-colors duration-200;
+}
+
+.cyber-btn-primary {
+  @apply bg-cyber-green text-cyber-bg font-bold py-2.5 px-6 rounded-lg
+         hover:shadow-cyber-green transition-all duration-200
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.cyber-btn-secondary {
+  @apply border border-cyber-border text-cyber-text py-2.5 px-6 rounded-lg
+         hover:border-cyber-green hover:text-cyber-green transition-all duration-200;
+}
+
+.cyber-label {
+  @apply block text-sm font-medium text-cyber-muted mb-1;
+}
+
+.cyber-error {
+  @apply text-cyber-red text-sm mt-1;
+}
+
+/* ── Badge difficulty colors ─────────────────────────────────────────────── */
+.difficulty-beginner     { @apply text-cyber-green bg-cyber-green/10 border border-cyber-green/30; }
+.difficulty-intermediate { @apply text-cyber-cyan bg-cyber-cyan/10 border border-cyber-cyan/30; }
+.difficulty-advanced     { @apply text-yellow-400 bg-yellow-400/10 border border-yellow-400/30; }
+.difficulty-expert       { @apply text-cyber-red bg-cyber-red/10 border border-cyber-red/30; }
